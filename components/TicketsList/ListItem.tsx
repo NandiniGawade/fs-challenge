@@ -22,6 +22,12 @@ const useStyles = makeStyles((theme) =>
       color: '#FFFFFF',
       backgroundColor: '#5B994C',
     },
+    status_open: {
+      backgroundColor: '#5B994C'
+    },
+    status_close: {
+      backgroundColor: 'gray',
+    }
   })
 );
 
@@ -34,6 +40,7 @@ const ListItem: FC<Ticket> = ({ id, user, status, createdAt, dueDate }) => {
 
   const createdAtFormatted = formatToDate(createdAt);
   const dueDateFormatted = formatToDate(dueDate);
+  const statusBackgroundColor = status === 'OPEN' ? classes.status_open : classes.status_close;
 
   return (
     <Grid container className={classes.root}>
@@ -50,7 +57,7 @@ const ListItem: FC<Ticket> = ({ id, user, status, createdAt, dueDate }) => {
         <Typography className={classes.text}>{dueDateFormatted}</Typography>
       </Grid>
       <Grid item xs={2}>
-        <Chip label={status} className={classes.status} />
+        <Chip label={status} className={[classes.status, statusBackgroundColor].join(' ')} />
       </Grid>
     </Grid>
   );
