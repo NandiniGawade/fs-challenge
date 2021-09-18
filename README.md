@@ -1,4 +1,4 @@
-# Zenjob Coding Challenge
+# Frontend Challenge
 
 This is a **coding challenge** intended for **frontend engineers**. It holds **two different tasks**. For finishing Tasks A and B with some brief documentation, you should not need to invest more than **2 hours** depending on your familiarity with the tech stack and your skills. 
 
