@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Box, createStyles, makeStyles } from '@material-ui/core';
 import { ListHeader } from './ListHeader';
 import { ListBody } from './ListBody';
+import { isMobileDevice } from '../../hooks/verifyDevice';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -20,12 +21,13 @@ const useStyles = makeStyles((theme) =>
 
 const TicketsList: FC = () => {
   const classes = useStyles();
-
+  const isMobile = isMobileDevice();
+  
   return (
     <Box component="main" className={classes.root}>
       <Box className={classes.list}>
-        <ListHeader />
-        <ListBody />
+      { isMobile == false && <ListHeader />}
+        <ListBody/>
       </Box>
     </Box>
   );

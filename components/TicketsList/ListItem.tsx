@@ -11,6 +11,7 @@ import {
   Button} from '@material-ui/core';
 import { deleteTicket } from '../../hooks/deleteTicket';
 import { Alert, Snackbar } from '@mui/material';
+import { isMobileDevice } from '../../hooks/verifyDevice';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -42,6 +43,9 @@ const useStyles = makeStyles((theme) =>
       border: '1px solid #808080',
       marginLeft: '13%'
     },
+    delete_margin_top: {
+      marginTop: '15%'
+    }
   })
 );
 
@@ -60,7 +64,8 @@ const ListItem: FC<Ticket> = ({ id, user, status, createdAt, dueDate }) => {
   const createdAtFormatted = formatToDate(createdAt);
   const dueDateFormatted = formatToDate(dueDate);
   const statusBackgroundColor = status === 'OPEN' ? classes.status_open : classes.status_close;
-
+  const isMobile = isMobileDevice();
+  
   const [open, setOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isErrorOpen, setIsErrorOpen] = useState(false);
@@ -104,26 +109,53 @@ const ListItem: FC<Ticket> = ({ id, user, status, createdAt, dueDate }) => {
           </Alert>
         </Snackbar>
 
-        <Grid container className={classes.root}>
-          <Grid item xs={1}>
-            <Typography className={classes.text}>{id}</Typography>
-          </Grid>
-          <Grid item xs={3}>
-            <Typography className={classes.text}>{`${user.firstName} ${user.lastName}`}</Typography>
-          </Grid>
-          <Grid item xs={2}>
-            <Typography className={classes.text}>{createdAtFormatted}</Typography>
-          </Grid>
-          <Grid item xs={2}>
-            <Typography className={classes.text}>{dueDateFormatted}</Typography>
-          </Grid>
-          <Grid item xs={2}>
-            <Chip label={status} className={[classes.status, statusBackgroundColor].join(' ')} />
-          </Grid>
-          <Grid item xs={2}>
-          <Typography><DeleteOutlined className={classes.delete_icon} onClick={handleClickOpen}/></Typography>
-          </Grid>
-        </Grid>
+        {isMobile ? 
+    <Grid container className={classes.root} spacing={3}>
+      <Grid item xs={6}>
+        <Typography className={classes.text}>ID</Typography>
+        <Typography className={classes.text}>{id}</Typography>
+      </Grid>
+      <Grid item xs={6}>
+        <Typography className={classes.text}>Requested by</Typography>
+        <Typography className={classes.text}>{`${user.firstName} ${user.lastName}`}</Typography>
+      </Grid>
+      <Grid item xs={6}>
+        <Typography className={classes.text}>Create date</Typography>
+        <Typography className={classes.text}>{createdAtFormatted}</Typography>
+      </Grid>
+      <Grid item xs={6}>
+        <Typography className={classes.text}>Due date</Typography>
+        <Typography className={classes.text}>{dueDateFormatted}</Typography>
+      </Grid>
+      <Grid item xs={6}>
+        <Typography className={classes.text}>Status</Typography>
+        <Chip label={status} className={[classes.status, statusBackgroundColor].join(' ')}/>
+      </Grid>
+      <Grid item xs={6}>
+        <Typography><DeleteOutlined className={[classes.delete_icon, classes.delete_margin_top].join(' ')} onClick={handleClickOpen}/></Typography>
+      </Grid>
+    </Grid> :
+
+    <Grid container className={classes.root}>
+      <Grid item xs={1}>
+        <Typography className={classes.text}>{id}</Typography>
+      </Grid>
+      <Grid item xs={3}>
+      <Typography className={classes.text}>{`${user.firstName} ${user.lastName}`}</Typography>
+      </Grid>
+      <Grid item xs={3}>
+        <Typography className={classes.text}>{createdAtFormatted}</Typography>
+      </Grid>
+      <Grid item xs={2}>
+        <Typography className={classes.text}>{dueDateFormatted}</Typography>
+      </Grid>
+      <Grid item xs={2}>
+        <Chip label={status} className={[classes.status, statusBackgroundColor].join(' ')}/>
+      </Grid>
+      <Grid item xs={1}>
+        <Typography><DeleteOutlined className={classes.delete_icon} onClick={handleClickOpen}/></Typography>
+      </Grid>
+    </Grid> }
 
         <Dialog open={open} maxWidth="sm" fullWidth>
           <DialogTitle>Are you sure ?</DialogTitle>
