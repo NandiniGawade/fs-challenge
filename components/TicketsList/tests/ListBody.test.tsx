@@ -40,4 +40,13 @@ describe('ListBody', () => {
 
     expect(screen.getByText('Nothing found')).toBeInTheDocument();
   });
+
+  it('should display delete icon', () => {
+    (useTickets as jest.Mock).mockReturnValue({
+      isLoading: false,
+      data: tickets,
+    });
+    render(<ListBody />);
+    expect(screen.queryAllByTestId('deleteIcon')[0]).toBeInTheDocument();
+  });
 });

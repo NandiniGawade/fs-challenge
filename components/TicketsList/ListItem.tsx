@@ -133,7 +133,7 @@ const ListItem: FC<Ticket> = ({ id, user, status, createdAt, dueDate }) => {
         <Chip label={status} className={[classes.status, statusBackgroundColor].join(' ')}/>
       </Grid>
       <Grid item xs={6}>
-        <Typography><DeleteOutlined className={[classes.delete_icon, classes.delete_margin_top].join(' ')} onClick={handleClickOpen}/></Typography>
+        <Typography data-testid="deleteIcon"><DeleteOutlined  className={[classes.delete_icon, classes.delete_margin_top].join(' ')} onClick={handleClickOpen}/></Typography>
       </Grid>
     </Grid> :
 
@@ -154,7 +154,7 @@ const ListItem: FC<Ticket> = ({ id, user, status, createdAt, dueDate }) => {
         <Chip label={status} className={[classes.status, statusBackgroundColor].join(' ')}/>
       </Grid>
       <Grid item xs={1}>
-        <Typography><DeleteOutlined className={classes.delete_icon} onClick={handleClickOpen}/></Typography>
+        <Typography data-testid="deleteIcon"><DeleteOutlined  className={classes.delete_icon} onClick={handleClickOpen}/></Typography>
       </Grid>
     </Grid> }
 
