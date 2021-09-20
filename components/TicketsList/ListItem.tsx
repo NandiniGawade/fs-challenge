@@ -41,7 +41,8 @@ const useStyles = makeStyles((theme) =>
     delete_icon: {
       borderRadius: '5px',
       border: '1px solid #808080',
-      marginLeft: '13%'
+      marginLeft: '13%',
+      cursor: 'pointer'
     },
     delete_margin_top: {
       marginTop: '15%'
