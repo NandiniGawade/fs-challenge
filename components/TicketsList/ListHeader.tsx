@@ -28,12 +28,13 @@ const ListHeader: FC = () => {
       <Grid item xs={3}>
         <Typography className={classes.text}>Create date</Typography>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={2}>
         <Typography className={classes.text}>Due date</Typography>
       </Grid>
       <Grid item xs={2}>
         <Typography className={classes.text}>Status</Typography>
       </Grid>
+      <Grid item xs={1}></Grid>
     </Grid>
   );
 };

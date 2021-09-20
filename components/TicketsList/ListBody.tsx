@@ -25,6 +25,7 @@ const ListBody: FC<ListBodyProps> = () => {
   const { isLoading, data: tickets } = useTickets();
 
   const isEmptyContent = !isLoading && !tickets?.length;
+  tickets?.sort((a, b) => (a.id > b.id) ? 1 : -1)
 
   return (
     <Box className={classes.root}>
